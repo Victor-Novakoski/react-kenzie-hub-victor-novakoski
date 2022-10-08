@@ -102,7 +102,7 @@ function Registrar() {
             <input
               id="senha"
               placeholder="Digite aqui sua senha"
-              type="text"
+              type="password"
               {...register('password')}
             />
             <p>{errors.password?.message}</p>
@@ -113,7 +113,7 @@ function Registrar() {
             <input
               id="confirmar-senha"
               placeholder="Digite novamente sua senha"
-              type="text"
+              type="password"
               {...register('confirm_password')}
             />
             <p>{errors.confirm_password?.message}</p>
