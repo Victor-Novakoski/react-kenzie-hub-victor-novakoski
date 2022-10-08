@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <HomePage>
-      {!user && <Navigate to="/login" replace={true} />}
+      {!user && <Navigate to="/" replace={true} />}
       <>
         <Cabecalho />
         <section>
