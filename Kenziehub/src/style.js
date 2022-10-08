@@ -5,6 +5,5 @@ export const Container = styled.section`
   background-color: var(--Grey-4);
   color:var(--Grey-0);
   width:100%;
-  height:100vh;
-  
+  min-height: 100vh;
 `

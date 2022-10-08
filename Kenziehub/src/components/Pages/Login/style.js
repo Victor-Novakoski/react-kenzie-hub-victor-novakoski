@@ -1,11 +1,26 @@
 import styled from 'styled-components'
 
 export const LoginPage = styled.section`
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  a {
+    background-color: var(--Color-primary);
+    color: var(--Grey-0);
+    width: 100%;
+    height: 48px;
+    border-radius: 4px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+    }
+  }
 
   figure {
     text-align: center;
@@ -35,64 +50,6 @@ export const LoginPage = styled.section`
     border-radius: 4px;
     color: var(--Grey-0);
     font-weight: 900;
-
-    &:hover {
-      -webkit-animation: vibrate-1 0.3s linear infinite both;
-      animation: vibrate-1 0.3s linear infinite both;
-
-      @-webkit-keyframes vibrate-1 {
-        0% {
-          -webkit-transform: translate(0);
-          transform: translate(0);
-        }
-        20% {
-          -webkit-transform: translate(-2px, 2px);
-          transform: translate(-2px, 2px);
-        }
-        40% {
-          -webkit-transform: translate(-2px, -2px);
-          transform: translate(-2px, -2px);
-        }
-        60% {
-          -webkit-transform: translate(2px, 2px);
-          transform: translate(2px, 2px);
-        }
-        80% {
-          -webkit-transform: translate(2px, -2px);
-          transform: translate(2px, -2px);
-        }
-        100% {
-          -webkit-transform: translate(0);
-          transform: translate(0);
-        }
-      }
-      @keyframes vibrate-1 {
-        0% {
-          -webkit-transform: translate(0);
-          transform: translate(0);
-        }
-        20% {
-          -webkit-transform: translate(-2px, 2px);
-          transform: translate(-2px, 2px);
-        }
-        40% {
-          -webkit-transform: translate(-2px, -2px);
-          transform: translate(-2px, -2px);
-        }
-        60% {
-          -webkit-transform: translate(2px, 2px);
-          transform: translate(2px, 2px);
-        }
-        80% {
-          -webkit-transform: translate(2px, -2px);
-          transform: translate(2px, -2px);
-        }
-        100% {
-          -webkit-transform: translate(0);
-          transform: translate(0);
-        }
-      }
-    }
   }
 
   div {
@@ -121,23 +78,33 @@ export const LoginPage = styled.section`
     flex-direction: column;
     gap: 22px;
 
-    input {
-      border: 1px solid var(--Grey-0);
-      background-color: var(--Grey-2);
-      color: var(--Grey-0);
+    p {
+      color: var(--Negative);
+      font-size: 13px;
       width: 100%;
-      height: 48px;
-      border-radius: 4px;
-      padding: 0px 16.2426px;
     }
 
-    button {
-      background-color: var(--Color-primary);
-      color: var(--Grey-0);
-      width: 100%;
-      height: 48px;
-      border-radius: 4px;
-      font-weight: 900;
+    label {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      svg {
+        position: absolute;
+        top: 35px;
+        right: 15px;
+        cursor: pointer;
+      }
+
+      input {
+        border: 1px solid var(--Grey-0);
+        background-color: var(--Grey-2);
+        color: var(--Grey-0);
+        width: 100%;
+        height: 48px;
+        border-radius: 4px;
+        padding: 0 16px;
+      }
     }
   }
 `

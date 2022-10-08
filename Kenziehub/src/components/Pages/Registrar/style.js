@@ -1,8 +1,11 @@
 import styled from 'styled-components'
+import 'animate.css'
 
 export const Container = styled.section`
-  width: 90%;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  max-width: 380px;
+  padding: 3rem 0.8rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -10,31 +13,37 @@ export const Container = styled.section`
   justify-content: center;
   gap: 1.5rem;
 
-  @media (min-width: 1024px) {
-    width: 40%;
-  }
-  @media (min-width: 1440px) {
-    width: 30%;
-  }
-  @media (min-width: 1700px) {
-    width: 20%;
+  p {
+    color: var(--Negative);
+    font-size: 13px;
+    width: 100%;
   }
 
   & > div {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
-    button {
-      padding: 0 1.015rem;
+    > a {
+      padding: 0 1rem;
       background-color: var(--Grey-3);
       color: var(--Grey-0);
-      width: 67.49px;
-      height: 40.11px;
+      width: 67px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        box-shadow: 0px 5px 10px 2.5px var(--Grey-0);
+        border: solid 1px var(--Grey-0);
+        animation: shakeX 2s;
+      }
     }
   }
 
-  div + div {
+  .div_tittle {
     background-color: var(--Grey-3);
     display: flex;
     flex-direction: column;
@@ -47,7 +56,7 @@ export const Container = styled.section`
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 0.5rem;
       span {
         color: var(--Grey-1);
       }
@@ -55,83 +64,29 @@ export const Container = styled.section`
 
     button {
       width: 100%;
+      height: 40px;
       margin-top: 1rem;
+      padding: 0 1rem;
+      color: var(--Grey-0);
       background-color: var(--Color-primary-Negative);
-
-      &:hover {
-        -webkit-animation: vibrate-1 0.3s linear infinite both;
-        animation: vibrate-1 0.3s linear infinite both;
-
-        @-webkit-keyframes vibrate-1 {
-          0% {
-            -webkit-transform: translate(0);
-            transform: translate(0);
-          }
-          20% {
-            -webkit-transform: translate(-2px, 2px);
-            transform: translate(-2px, 2px);
-          }
-          40% {
-            -webkit-transform: translate(-2px, -2px);
-            transform: translate(-2px, -2px);
-          }
-          60% {
-            -webkit-transform: translate(2px, 2px);
-            transform: translate(2px, 2px);
-          }
-          80% {
-            -webkit-transform: translate(2px, -2px);
-            transform: translate(2px, -2px);
-          }
-          100% {
-            -webkit-transform: translate(0);
-            transform: translate(0);
-          }
-        }
-        @keyframes vibrate-1 {
-          0% {
-            -webkit-transform: translate(0);
-            transform: translate(0);
-          }
-          20% {
-            -webkit-transform: translate(-2px, 2px);
-            transform: translate(-2px, 2px);
-          }
-          40% {
-            -webkit-transform: translate(-2px, -2px);
-            transform: translate(-2px, -2px);
-          }
-          60% {
-            -webkit-transform: translate(2px, 2px);
-            transform: translate(2px, 2px);
-          }
-          80% {
-            -webkit-transform: translate(2px, -2px);
-            transform: translate(2px, -2px);
-          }
-          100% {
-            -webkit-transform: translate(0);
-            transform: translate(0);
-          }
-        }
-      }
     }
   }
 `
 export const Form = styled.form`
   width: 100%;
   display: flex;
+  margin-top: 1.5rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: 1rem;
 
   input {
     background-color: var(--Grey-2);
     color: var(--Grey-0);
-    height: 2rem;
+    min-height: 2.5rem;
     width: 100%;
     margin: 0 auto;
-    padding: 0 1.015rem;
+    padding: 0 1rem;
 
     &::placeholder {
       color: var(--Grey-1);
@@ -140,13 +95,25 @@ export const Form = styled.form`
   select {
     background-color: var(--Grey-2);
     color: var(--Grey-1);
-    height: 2rem;
+    height: 2.5rem;
     width: 100%;
     margin: 0 auto;
-    padding: 0 1.015rem;
+    padding: 0 1rem;
 
     &::placeholder {
       color: var(--Grey-1);
     }
+  }
+`
+export const DivInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  text-align: left;
+
+  label {
+    display: block;
+    width: 100%;
   }
 `
