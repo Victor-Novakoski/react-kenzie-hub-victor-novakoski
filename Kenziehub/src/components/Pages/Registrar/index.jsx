@@ -54,7 +54,7 @@ function Registrar() {
     }
   }
 
-  const onSubmitFunction = data => {
+  const registerSubmit = data => {
     console.log(data)
     api
       .post('/users', data)
@@ -76,7 +76,7 @@ function Registrar() {
           <span>Rapido e grátis, vamos nessa</span>
         </div>
 
-        <Form onSubmit={handleSubmit(onSubmitFunction)}>
+        <Form onSubmit={handleSubmit(registerSubmit)}>
           <DivInput>
             <label htmlFor="nome">Nome</label>
             <input
