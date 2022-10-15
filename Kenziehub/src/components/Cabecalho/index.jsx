@@ -11,6 +11,7 @@ function Cabecalho() {
   const logout = () => {
     setUser('')
     navigate('/')
+    window.location.reload()
   }
 
   return (

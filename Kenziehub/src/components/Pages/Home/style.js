@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const HomePage = styled.section`
-  section {
+  .section_Name {
     display: flex;
     flex-direction: column;
     justify-content: center;

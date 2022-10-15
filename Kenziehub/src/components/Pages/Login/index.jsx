@@ -11,11 +11,12 @@ import * as Yup from 'yup'
 import 'animate.css'
 import api from '../../services/api'
 import { UserContext } from '../../../contexts/UserContext'
-
+import { useLocalStorage } from 'use-hooks'
 
 function Login() {
   const [passwordShow, setPasswordShow] = useState(true)
-  const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext)
+  const [token, setToken] = useLocalStorage('@token', '')
 
   const formSchema = Yup.object().shape({
     email: Yup.string().required('email obrigatório'),
@@ -31,57 +32,60 @@ function Login() {
   })
 
   const onSubmitFunction = data => {
-    console.log(data)
     api
       .post('/sessions', data)
       .then(resp => {
+        console.log(resp.data)
         userContext.setUser(resp.data.user)
+        setToken(resp.data.token)
       })
       .catch(err => console.log(err))
   }
 
   return (
-      <LoginPage className="animate__animated animate__fadeIn">
-        <figure>
-          <img src={logo} alt="" />
-        </figure>
-        <div>
-          <h3>Login</h3>
-          {userContext.user.length != 0 && <Navigate to="/dashboard" replace={true} />}
-          <form action="" onSubmit={handleSubmit(onSubmitFunction)}>
-            <label htmlFor="">
-              Email
-              <input
-                type="text"
-                placeholder="Digite aqui seu email"
-                {...register('email')}
-              />
-              <p>{errors.email?.message}</p>
-            </label>
+    <LoginPage className="animate__animated animate__fadeIn">
+      <figure>
+        <img src={logo} alt="" />
+      </figure>
+      <div>
+        <h3>Login</h3>
+        {userContext.user.length != 0 && (
+          <Navigate to="/dashboard" replace={true} />
+        )}
+        <form action="" onSubmit={handleSubmit(onSubmitFunction)}>
+          <label htmlFor="">
+            Email
+            <input
+              type="text"
+              placeholder="Digite aqui seu email"
+              {...register('email')}
+            />
+            <p>{errors.email?.message}</p>
+          </label>
 
-            <label htmlFor="">
-              Senha
-              <input
-                type={passwordShow ? 'password' : 'text'}
-                placeholder="Digite aqui sua senha"
-                {...register('password')}
-              />
-              <Icon
-                icon={passwordShow ? eyeOff : eye}
-                onClick={() => {
-                  setPasswordShow(!passwordShow)
-                }}
-              />
-              <p>{errors.password?.message}</p>
-            </label>
+          <label htmlFor="">
+            Senha
+            <input
+              type={passwordShow ? 'password' : 'text'}
+              placeholder="Digite aqui sua senha"
+              {...register('password')}
+            />
+            <Icon
+              icon={passwordShow ? eyeOff : eye}
+              onClick={() => {
+                setPasswordShow(!passwordShow)
+              }}
+            />
+            <p>{errors.password?.message}</p>
+          </label>
 
-            <button type="submit">Entrar</button>
-          </form>
+          <button type="submit">Entrar</button>
+        </form>
 
-          <span>Ainda não possui uma conta?</span>
-          <Link to="/register">Cadastre-se</Link>
-        </div>
-      </LoginPage> 
+        <span>Ainda não possui uma conta?</span>
+        <Link to="/register">Cadastre-se</Link>
+      </div>
+    </LoginPage>
   )
 }
 
