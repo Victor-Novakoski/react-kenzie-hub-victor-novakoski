@@ -28,15 +28,14 @@ function Modal({ setModalVisible }) {
       .post('/users/techs', data)
       .then(resp =>
         api
-        .get('/profile')
-        .then(resp => {
+          .get('/profile')
+          .then(resp => {
             userContext.setUser(resp.data)
           })
           .catch(err => console.log(err))
       )
       .catch(err => console.log(err))
   }
-
 
   return (
     <>

@@ -9,17 +9,16 @@ function TodoList() {
   const [modalVisible, setModalVisible] = useState(false)
   const userContext = useContext(UserContext)
   const user = userContext.user
-  
 
   function deleteTech(elem) {
     api
       .delete(`/users/techs/${elem}`)
       .then(resp => {
         window.location.reload()
-        console.log(resp)})
+        console.log(resp)
+      })
       .catch(err => console.log(err))
   }
-
 
   return (
     <>
@@ -33,27 +32,33 @@ function TodoList() {
         </div>
 
         <ul>
-          {user.techs.map(elem => {
-            return (
-              <li>
-                <p>{elem.title}</p>
-                <div>
-                  <p>{elem.status}</p>
-                  <button
-                    onClick={() => {
-                      if (elem.id === elem.id) {
-                        return deleteTech(elem.id)
-                      } else {
-                        console.log('erro')
-                      }
-                    }}
-                  >
-                    <BsTrash />
-                  </button>
-                </div>
-              </li>
-            )
-          })}
+          {user.techs.length == 0 ? (
+            <li>
+              <p>você tem que adicionar uma nova tecnologia</p>
+            </li>
+          ) : (
+            user.techs.map(elem => {
+              return (
+                <li>
+                  <p>{elem.title}</p>
+                  <div>
+                    <p>{elem.status}</p>
+                    <button
+                      onClick={() => {
+                        if (elem.id === elem.id) {
+                          return deleteTech(elem.id)
+                        } else {
+                          console.log('erro')
+                        }
+                      }}
+                    >
+                      <BsTrash />
+                    </button>
+                  </div>
+                </li>
+              )
+            })
+          )}
         </ul>
       </ListTecnologias>
     </>

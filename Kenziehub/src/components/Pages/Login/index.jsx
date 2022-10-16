@@ -9,9 +9,9 @@ import { Link, Navigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import 'animate.css'
-import api from '../../services/api'
 import { UserContext } from '../../../contexts/UserContext'
 import { useLocalStorage } from 'use-hooks'
+import api from '../../services/api'
 
 function Login() {
   const [passwordShow, setPasswordShow] = useState(true)

@@ -30,7 +30,7 @@ function Registrar() {
   } = useForm({
     resolver: yupResolver(formSchema),
   })
-  
+
   const notify = (message, type) => {
     const config = {
       position: 'top-right',
