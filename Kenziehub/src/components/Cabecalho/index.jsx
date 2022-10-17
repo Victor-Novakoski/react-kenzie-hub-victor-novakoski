@@ -2,13 +2,16 @@ import React from 'react'
 import logo from '../../assets/Logo.svg'
 import { Header } from './styles'
 import { useLocalStorage } from 'use-hooks'
+import { useNavigate } from 'react-router-dom'
 
 function Cabecalho() {
   const [user, setUser] = useLocalStorage('user')
+  const navigate = useNavigate()
 
   const logout = () => {
     setUser('')
-    window.location.reload(false);
+    navigate('/')
+    window.location.reload()
   }
 
   return (

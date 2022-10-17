@@ -30,7 +30,7 @@ function Registrar() {
   } = useForm({
     resolver: yupResolver(formSchema),
   })
-  
+
   const notify = (message, type) => {
     const config = {
       position: 'top-right',
@@ -54,7 +54,7 @@ function Registrar() {
     }
   }
 
-  const onSubmitFunction = data => {
+  const registerSubmit = data => {
     console.log(data)
     api
       .post('/users', data)
@@ -76,7 +76,7 @@ function Registrar() {
           <span>Rapido e grátis, vamos nessa</span>
         </div>
 
-        <Form onSubmit={handleSubmit(onSubmitFunction)}>
+        <Form onSubmit={handleSubmit(registerSubmit)}>
           <DivInput>
             <label htmlFor="nome">Nome</label>
             <input
@@ -102,7 +102,7 @@ function Registrar() {
             <input
               id="senha"
               placeholder="Digite aqui sua senha"
-              type="text"
+              type="password"
               {...register('password')}
             />
             <p>{errors.password?.message}</p>
@@ -113,7 +113,7 @@ function Registrar() {
             <input
               id="confirmar-senha"
               placeholder="Digite novamente sua senha"
-              type="text"
+              type="password"
               {...register('confirm_password')}
             />
             <p>{errors.confirm_password?.message}</p>
@@ -147,9 +147,12 @@ function Registrar() {
               placeholder="Primeiro Módulo"
               {...register('course_module')}
             >
-              <option value="M1">M1</option>
-              <option value="M2">M2</option>
-              <option value="M3">M3</option>
+              <option value="M1">Módulo 1</option>
+              <option value="M2">Módulo 2</option>
+              <option value="M3">Módulo 3</option>
+              <option value="M4">Módulo 4</option>
+              <option value="M5">Módulo 5</option>
+              <option value="M6">Módulo 6</option>
             </select>
           </DivInput>
 

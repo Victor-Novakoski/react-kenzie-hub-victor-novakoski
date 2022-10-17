@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Icon } from 'react-icons-kit'
 import { eyeOff } from 'react-icons-kit/feather/eyeOff'
 import { eye } from 'react-icons-kit/feather/eye'
@@ -9,13 +9,14 @@ import { Link, Navigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import 'animate.css'
-import api from '../../services/api'
+import { UserContext } from '../../../contexts/UserContext'
 import { useLocalStorage } from 'use-hooks'
+import api from '../../services/api'
 
 function Login() {
   const [passwordShow, setPasswordShow] = useState(true)
-
-  const [user, setUser] = useLocalStorage('user', '')
+  const userContext = useContext(UserContext)
+  const [token, setToken] = useLocalStorage('@token', '')
 
   const formSchema = Yup.object().shape({
     email: Yup.string().required('email obrigatório'),
@@ -31,11 +32,12 @@ function Login() {
   })
 
   const onSubmitFunction = data => {
-    console.log(data)
     api
       .post('/sessions', data)
       .then(resp => {
-        setUser(resp['data']['user'])
+        console.log(resp.data)
+        userContext.setUser(resp.data.user)
+        setToken(resp.data.token)
       })
       .catch(err => console.log(err))
   }
@@ -47,7 +49,9 @@ function Login() {
       </figure>
       <div>
         <h3>Login</h3>
-        {user.length != 0 && <Navigate to="/dashboard" replace={true} />}
+        {userContext.user.length != 0 && (
+          <Navigate to="/dashboard" replace={true} />
+        )}
         <form action="" onSubmit={handleSubmit(onSubmitFunction)}>
           <label htmlFor="">
             Email
