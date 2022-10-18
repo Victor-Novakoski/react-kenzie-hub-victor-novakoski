@@ -1,13 +1,16 @@
-import { useLocalStorage } from "use-hooks"
-import { UserContext } from "../contexts/UserContext"
+import { useLocalStorage } from 'use-hooks'
+import React, { createContext, useState } from 'react'
+
+export const AuthContext = createContext({})
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage('user', '')
+  const [token, setToken] = useLocalStorage('@token', '')
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <AuthContext.Provider value={{ user, setUser, token, setToken }}>
       {children}
-    </UserContext.Provider>
-  );
+    </AuthContext.Provider>
+  )
 }
-export default UserContextProvider;
+export default UserContextProvider

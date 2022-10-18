@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const HomePage = styled.section`
   .section_Name {
     display: flex;
+    min-height: 131px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
