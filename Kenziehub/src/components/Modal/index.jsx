@@ -5,11 +5,10 @@ import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { ModalStyle } from './styled'
 import api from '../services/api'
-import { UserContext } from '../../contexts/UserContext'
+import { AuthContext } from '../../Providers/UserContextProvider'
 
 function Modal({ setModalVisible }) {
-  const userContext = useContext(UserContext)
-  const user = userContext.user
+  const { user, setUser } = useContext(AuthContext)
 
   const formSchema = Yup.object().shape({
     title: Yup.string().required('nome obrigatório'),
@@ -30,7 +29,7 @@ function Modal({ setModalVisible }) {
         api
           .get('/profile')
           .then(resp => {
-            userContext.setUser(resp.data)
+            setUser(resp.data)
           })
           .catch(err => console.log(err))
       )

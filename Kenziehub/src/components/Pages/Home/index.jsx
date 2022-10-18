@@ -1,21 +1,20 @@
 import React, { useEffect, useContext } from 'react'
 import { Navigate } from 'react-router-dom'
 import Cabecalho from '../../Cabecalho'
-import { UserContext } from '../../../contexts/UserContext'
+import { AuthContext } from '../../../Providers/UserContextProvider'
 
 import { HomePage } from './style'
 import TodoList from '../../TodoList'
 import api from '../../services/api'
 
 function Home() {
-  const userContext = useContext(UserContext)
-  const user = userContext.user
+  const { user, setUser } = useContext(AuthContext)
 
   useEffect(() => {
     api
       .get('/profile')
       .then(resp => {
-        userContext.setUser(resp.data)
+        setUser(resp.data)
       })
       .catch(err => console.log(err))
   }, [])
