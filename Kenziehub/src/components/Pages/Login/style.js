@@ -6,6 +6,7 @@ export const LoginPage = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 
   a {
     background-color: var(--Color-primary);
@@ -18,24 +19,16 @@ export const LoginPage = styled.section`
     align-items: center;
     justify-content: center;
 
-    &:hover {
-    }
   }
 
   figure {
     text-align: center;
     margin-bottom: 1.5rem;
     width: 50%;
+    max-width: 144px;
 
     img {
       width: 100%;
-    }
-
-    @media (min-width: 1024px) {
-      width: 20%;
-    }
-    @media (min-width: 2000px) {
-      width: 10%;
     }
   }
 
@@ -54,6 +47,7 @@ export const LoginPage = styled.section`
 
   div {
     width: 90%;
+    max-width: 369px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,15 +55,7 @@ export const LoginPage = styled.section`
     padding: 42px 22px;
     gap: 3rem;
 
-    @media (min-width: 1024px) {
-      width: 50%;
-    }
-    @media (min-width: 1440px) {
-      width: 40%;
-    }
-    @media (min-width: 2000px) {
-      width: 20%;
-    }
+
   }
 
   form {

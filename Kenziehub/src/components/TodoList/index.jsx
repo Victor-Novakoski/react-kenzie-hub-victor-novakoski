@@ -1,21 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BsTrash, BsPlusLg } from 'react-icons/bs'
-import { UserContext } from '../../contexts/UserContext'
+import { AuthContext } from '../../Providers/UserContextProvider'
 import Modal from '../Modal'
 import api from '../services/api'
 import { ListTecnologias } from './styles'
 
 function TodoList() {
   const [modalVisible, setModalVisible] = useState(false)
-  const userContext = useContext(UserContext)
-  const user = userContext.user
+  const { user, setUser } = useContext(AuthContext)
 
   function deleteTech(elem) {
     api
       .delete(`/users/techs/${elem}`)
       .then(resp => {
-        window.location.reload()
-        console.log(resp)
+        api
+          .get('/profile')
+          .then(resp => {
+            setUser(resp.data)
+          })
+          .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
   }
@@ -39,7 +42,7 @@ function TodoList() {
           ) : (
             user.techs.map(elem => {
               return (
-                <li>
+                <li key={elem.id}>
                   <p>{elem.title}</p>
                   <div>
                     <p>{elem.status}</p>

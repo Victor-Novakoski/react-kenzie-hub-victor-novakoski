@@ -5,7 +5,6 @@ import Error from './components/Pages/Error'
 import Login from './components/Pages/Login'
 import Registrar from './components/Pages/Registrar'
 import { Container } from './style'
-import api from './components/services/api'
 import UserContextProvider from './Providers/UserContextProvider'
 
 function App() {
