@@ -1,15 +1,16 @@
 import logo from '../../../assets/Logo.svg'
-import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer, toast } from 'react-toastify'
 import { Container, Form, DivInput } from './style'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
 import 'animate.css'
-import api from '../../services/api'
+import { useContext } from 'react'
+import { AuthContext } from '../../../Providers/UserContextProvider'
 
 function Registrar() {
+  const { registerSubmit } = useContext(AuthContext)
+
   const formSchema = Yup.object().shape({
     name: Yup.string().required('Nome obrigatório'),
     email: Yup.string().required('Email obrigatório').email('Email inválido'),
@@ -30,37 +31,6 @@ function Registrar() {
   } = useForm({
     resolver: yupResolver(formSchema),
   })
-
-  const notify = (message, type) => {
-    const config = {
-      position: 'top-right',
-      autoClose: 1500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    }
-    if (type === 'warn') {
-      return toast.warn(message, config)
-    }
-    if (type === 'success') {
-      return toast.success(message, config)
-    }
-    if (type === 'info') {
-      return toast.info(message, config)
-    } else {
-      return toast.error(message, config)
-    }
-  }
-
-  const registerSubmit = data => {
-    console.log(data)
-    api
-      .post('/users', data)
-      .then(resp => notify('conta criada com sucesso', 'success'))
-      .catch(err => notify('Ops! Algo deu errado', 'error'))
-  }
 
   return (
     <Container className="animate__animated animate__fadeIn">
@@ -159,9 +129,6 @@ function Registrar() {
           <button type="submit">Cadastrar</button>
         </Form>
       </div>
-      <ToastContainer
-        toastStyle={{ backgroundColor: 'black', color: 'white' }}
-      />
     </Container>
   )
 }

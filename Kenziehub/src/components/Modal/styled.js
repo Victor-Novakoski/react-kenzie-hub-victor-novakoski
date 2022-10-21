@@ -10,6 +10,7 @@ export const ModalStyle = styled.section`
   justify-content: center;
   align-items: center;
   z-index: 5;
+
   .backGround {
     position: absolute;
     min-height: 100vh;
@@ -17,6 +18,7 @@ export const ModalStyle = styled.section`
     background-color: var(--Grey-4);
     opacity: 30%;
   }
+
   .div_modal {
     position: absolute;
     min-width: 300px;
@@ -26,6 +28,7 @@ export const ModalStyle = styled.section`
     background-color: var(--Grey-3);
     border-radius: 8px;
     overflow: hidden;
+    
     div {
       width: 100%;
       display: flex;

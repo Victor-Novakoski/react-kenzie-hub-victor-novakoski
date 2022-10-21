@@ -5,16 +5,15 @@ import { eye } from 'react-icons-kit/feather/eye'
 import { useForm } from 'react-hook-form'
 import logo from '../../../assets/Logo.svg'
 import { LoginPage } from './style'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import 'animate.css'
-import {AuthContext} from '../../../Providers/UserContextProvider'
-import api from '../../services/api'
+import { AuthContext } from '../../../Providers/UserContextProvider'
 
 function Login() {
   const [passwordShow, setPasswordShow] = useState(true)
-  const { setUser, user, token, setToken } = useContext(AuthContext)
+  const { loginFunction } = useContext(AuthContext)
 
   const formSchema = Yup.object().shape({
     email: Yup.string().required('email obrigatório'),
@@ -29,16 +28,6 @@ function Login() {
     resolver: yupResolver(formSchema),
   })
 
-  const onSubmitFunction = data => {
-    api
-      .post('/sessions', data)
-      .then(resp => {
-        setUser(resp.data.user)
-        setToken(resp.data.token)
-      })
-      .catch(err => console.log(err))
-  }
-
   return (
     <LoginPage className="animate__animated animate__fadeIn">
       <figure>
@@ -46,8 +35,7 @@ function Login() {
       </figure>
       <div>
         <h3>Login</h3>
-        {user.length != 0 && <Navigate to="/dashboard" replace={true} />}
-        <form action="" onSubmit={handleSubmit(onSubmitFunction)}>
+        <form action="" onSubmit={handleSubmit(loginFunction)}>
           <label htmlFor="">
             Email
             <input
@@ -73,10 +61,8 @@ function Login() {
             />
             <p>{errors.password?.message}</p>
           </label>
-
           <button type="submit">Entrar</button>
         </form>
-
         <span>Ainda não possui uma conta?</span>
         <Link to="/register">Cadastre-se</Link>
       </div>
