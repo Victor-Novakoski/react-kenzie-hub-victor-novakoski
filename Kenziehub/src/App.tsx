@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './components/Pages/Home'
 import Error from './components/Pages/Error'

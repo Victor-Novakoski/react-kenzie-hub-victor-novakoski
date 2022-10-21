@@ -5,11 +5,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
 import 'animate.css'
-import { useContext } from 'react'
-import { AuthContext } from '../../../Providers/UserContextProvider'
+import { useUserContext } from '../../../Providers/UserContextProvider'
+
+export interface IUserRegister {
+  name: string
+  email: string
+  password: string
+  confirm_password: string
+  bio: string
+  contact: string
+  course_module: string
+}
 
 function Registrar() {
-  const { registerSubmit } = useContext(AuthContext)
+  const { registerSubmit } = useUserContext()
 
   const formSchema = Yup.object().shape({
     name: Yup.string().required('Nome obrigatório'),
@@ -28,7 +37,7 @@ function Registrar() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUserRegister>({
     resolver: yupResolver(formSchema),
   })
 
@@ -113,7 +122,6 @@ function Registrar() {
             <label htmlFor="Selecionar módulo">Selecionar Módulo</label>
             <select
               id="selecionar-modulo"
-              name=""
               placeholder="Primeiro Módulo"
               {...register('course_module')}
             >

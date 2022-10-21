@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
 import logo from '../../assets/Logo.svg'
 import { Header } from './styles'
-import { AuthContext } from '../../Providers/UserContextProvider'
+import { useUserContext } from '../../Providers/UserContextProvider'
 
 function Cabecalho() {
-  const { logout } = useContext(AuthContext)
+  const { logout } = useUserContext()
 
   return (
     <Header>
