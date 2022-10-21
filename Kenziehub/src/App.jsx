@@ -5,12 +5,23 @@ import Error from './components/Pages/Error'
 import Login from './components/Pages/Login'
 import Registrar from './components/Pages/Registrar'
 import { Container } from './style'
-import UserContextProvider from './Providers/UserContextProvider'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import Providers from './Providers/Providers'
 
 function App() {
   return (
-    <UserContextProvider>
+    <Providers>
       <Container>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={1500}
+          hideProgressBar={false}
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
+          toastStyle={{ backgroundColor: 'black', color: 'white' }}
+        />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Home />} />
@@ -18,7 +29,7 @@ function App() {
           <Route path="*" element={<Error />} />
         </Routes>
       </Container>
-    </UserContextProvider>
+    </Providers>
   )
 }
 

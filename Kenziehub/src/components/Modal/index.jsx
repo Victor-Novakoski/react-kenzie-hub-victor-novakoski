@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { VscClose } from 'react-icons/vsc'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { ModalStyle } from './styled'
-import api from '../services/api'
 import { AuthContext } from '../../Providers/UserContextProvider'
+import { TechContext } from '../../Providers/TechContext'
 
 function Modal({ setModalVisible }) {
-  const { user, setUser } = useContext(AuthContext)
+  const { createTech } = useContext(TechContext)
 
   const formSchema = Yup.object().shape({
     title: Yup.string().required('nome obrigatório'),
@@ -21,20 +21,6 @@ function Modal({ setModalVisible }) {
   } = useForm({
     resolver: yupResolver(formSchema),
   })
-
-  const createTech = data => {
-    api
-      .post('/users/techs', data)
-      .then(resp =>
-        api
-          .get('/profile')
-          .then(resp => {
-            setUser(resp.data)
-          })
-          .catch(err => console.log(err))
-      )
-      .catch(err => console.log(err))
-  }
 
   return (
     <>
