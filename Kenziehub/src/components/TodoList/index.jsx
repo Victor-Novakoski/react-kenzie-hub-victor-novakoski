@@ -1,27 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BsTrash, BsPlusLg } from 'react-icons/bs'
+import { TechContext } from '../../Providers/TechContext'
 import { AuthContext } from '../../Providers/UserContextProvider'
 import Modal from '../Modal'
-import api from '../services/api'
 import { ListTecnologias } from './styles'
 
 function TodoList() {
   const [modalVisible, setModalVisible] = useState(false)
-  const { user, setUser } = useContext(AuthContext)
-
-  function deleteTech(elem) {
-    api
-      .delete(`/users/techs/${elem}`)
-      .then(resp => {
-        api
-          .get('/profile')
-          .then(resp => {
-            setUser(resp.data)
-          })
-          .catch(err => console.log(err))
-      })
-      .catch(err => console.log(err))
-  }
+  const { techs } = useContext(AuthContext)
+  const { deleteTech } = useContext(TechContext)
 
   return (
     <>
@@ -35,12 +22,12 @@ function TodoList() {
         </div>
 
         <ul>
-          {user.techs.length == 0 ? (
+          {techs.length === 0 ? (
             <li>
               <p>você tem que adicionar uma nova tecnologia</p>
             </li>
           ) : (
-            user.techs.map(elem => {
+            techs.map(elem => {
               return (
                 <li key={elem.id}>
                   <p>{elem.title}</p>
@@ -50,8 +37,6 @@ function TodoList() {
                       onClick={() => {
                         if (elem.id === elem.id) {
                           return deleteTech(elem.id)
-                        } else {
-                          console.log('erro')
                         }
                       }}
                     >
