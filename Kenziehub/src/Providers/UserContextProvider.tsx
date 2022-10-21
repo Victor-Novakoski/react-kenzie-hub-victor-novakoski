@@ -81,14 +81,15 @@ export const UserContextProvider = ({ children }: IUserProviderProps) => {
         localStorage.setItem('@token', resp.data.token)
         setUser1(resp.data.user)
         navigate('/dashboard', { replace: true })
+        toast.success('Bem vindo ^^')
       })
-      .catch(err => console.log(err))
+      .catch(err => toast.error('email ou senha inválido'))
   }
 
   const registerSubmit = (formRegister: IUserRegister): void => {
     api
       .post('/users', formRegister)
-      .then(resp => toast.success('conta criada com sucesso'))
+      .then(resp => toast.success('conta criada com sucesso!'))
       .catch(err => toast.error('Ops! Algo deu errado'))
   }
 
