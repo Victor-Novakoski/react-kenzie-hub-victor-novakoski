@@ -33,7 +33,7 @@ export const TechProvider = ({ children }: IUserProviderProps) => {
         setTechs([...techs, resp.data])
         toast.success('Tecnologia cadastrada com sucesso!')
       })
-      .catch(err => toast.error('algo deu errado'))
+      .catch(err => toast.error('você já tem essa tecnologia cadastrada'))
   }
 
   const deleteTech = (techId: string): void => {
