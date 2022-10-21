@@ -1,18 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { BsTrash, BsPlusLg } from 'react-icons/bs'
-import { TechContext } from '../../Providers/TechContext'
-import { AuthContext } from '../../Providers/UserContextProvider'
+import { useTechContext } from '../../Providers/TechContext'
+import { useUserContext } from '../../Providers/UserContextProvider'
 import Modal from '../Modal'
 import { ListTecnologias } from './styles'
 
 function TodoList() {
-  const [modalVisible, setModalVisible] = useState(false)
-  const { techs } = useContext(AuthContext)
-  const { deleteTech } = useContext(TechContext)
+  const { techs } = useUserContext()
+  const { deleteTech, modalVisible, setModalVisible } = useTechContext()
 
   return (
     <>
-      {modalVisible ? <Modal setModalVisible={setModalVisible} /> : null}
+      {modalVisible ? <Modal /> : null}
       <ListTecnologias>
         <div className="tecnologias">
           <h3>Tecnologias</h3>

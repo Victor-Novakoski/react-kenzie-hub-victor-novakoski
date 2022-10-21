@@ -1,12 +1,11 @@
-import React, { useEffect, useContext } from 'react'
 import { Navigate } from 'react-router-dom'
 import Cabecalho from '../../Cabecalho'
-import { AuthContext } from '../../../Providers/UserContextProvider'
+import { useUserContext } from '../../../Providers/UserContextProvider'
 import { HomePage } from './style'
 import TodoList from '../../TodoList'
 
 function Home() {
-  const { user1, loading } = useContext(AuthContext)
+  const { user1, loading } = useUserContext()
 
   if (loading) {
     return null
