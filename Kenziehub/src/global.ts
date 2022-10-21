@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
-export const Global = styled.section`
+export const GlobalStyle = createGlobalStyle`
   * {
     padding: 0;
     margin: 0;

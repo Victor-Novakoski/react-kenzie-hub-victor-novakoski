@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import { useState } from 'react'
 import { Icon } from 'react-icons-kit'
 import { eyeOff } from 'react-icons-kit/feather/eyeOff'
 import { eye } from 'react-icons-kit/feather/eye'
@@ -9,11 +9,16 @@ import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import 'animate.css'
-import { AuthContext } from '../../../Providers/UserContextProvider'
+import { useUserContext } from '../../../Providers/UserContextProvider'
+
+export interface IUserLogin {
+  email: String
+  password: String
+}
 
 function Login() {
   const [passwordShow, setPasswordShow] = useState(true)
-  const { loginFunction } = useContext(AuthContext)
+  const { loginFunction } = useUserContext()
 
   const formSchema = Yup.object().shape({
     email: Yup.string().required('email obrigatório'),
@@ -24,7 +29,7 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUserLogin>({
     resolver: yupResolver(formSchema),
   })
 

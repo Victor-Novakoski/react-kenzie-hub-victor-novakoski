@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { VscClose } from 'react-icons/vsc'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { ModalStyle } from './styled'
-import { AuthContext } from '../../Providers/UserContextProvider'
 import { TechContext } from '../../Providers/TechContext'
+import { ITech } from '../../Providers/UserContextProvider'
 
-function Modal({ setModalVisible }) {
-  const { createTech } = useContext(TechContext)
+function Modal() {
+  const { createTech, setModalVisible } = useContext(TechContext)
 
   const formSchema = Yup.object().shape({
     title: Yup.string().required('nome obrigatório'),
@@ -18,7 +18,7 @@ function Modal({ setModalVisible }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ITech>({
     resolver: yupResolver(formSchema),
   })
 
@@ -38,7 +38,7 @@ function Modal({ setModalVisible }) {
             <input type="text" {...register('title')} />
             <p>{errors.title?.message}</p>
             <label htmlFor="">Selecionar status</label>
-            <select name="" id="" {...register('status')}>
+            <select id="" {...register('status')}>
               <option value="Iniciante">Iniciante</option>
               <option value="Intermediário">Intermediário</option>
               <option value="Avançado">Avançado</option>

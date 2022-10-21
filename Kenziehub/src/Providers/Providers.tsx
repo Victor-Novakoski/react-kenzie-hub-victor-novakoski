@@ -1,8 +1,7 @@
-import React from 'react'
 import { TechProvider } from './TechContext'
-import { UserContextProvider } from './UserContextProvider'
+import { IUserProviderProps, UserContextProvider } from './UserContextProvider'
 
-function Providers({ children }) {
+function Providers({ children }: IUserProviderProps) {
   return (
     <UserContextProvider>
       <TechProvider>{children}</TechProvider>
