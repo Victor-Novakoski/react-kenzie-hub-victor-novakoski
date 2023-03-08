@@ -26,27 +26,47 @@ export const TechProvider = ({ children }: IUserProviderProps) => {
   const [modalVisible, setModalVisible] = useState(false)
   const { techs, setTechs } = useUserContext()
 
-  const createTech = (formData: ITech): void => {
-    api
-      .post('/users/techs', formData)
-      .then(resp => {
-        setTechs([...techs, resp.data])
-        toast.success('Tecnologia cadastrada com sucesso!')
-      })
-      .catch(err => toast.error('você já tem essa tecnologia cadastrada'))
+  const createTech = async (formData: ITech) => {
+    try {
+      const { data } = await api.post('/users/techs', formData)
+      setTechs([...techs, data])
+      toast.success('Tecnologia cadastrada com sucesso!')
+    } catch (error) {
+      toast.error('você já tem essa tecnologia cadastrada')
+    }
   }
+  
+  // const createTech = (formData: ITech): void => {
+  //   api
+  //     .post('/users/techs', formData)
+  //     .then(resp => {
+  //       setTechs([...techs, resp.data])
+  //       toast.success('Tecnologia cadastrada com sucesso!')
+  //     })
+  //     .catch(err => toast.error('você já tem essa tecnologia cadastrada'))
+  // }
 
   const deleteTech = (techId: string): void => {
-    api
-      .delete(`/users/techs/${techId}`)
-      .then(resp => {
-        toast.success('Tecnologia excluida com sucesso')
-        const newTechs = techs.filter(currentTech => currentTech.id !== techId)
-        setTechs(newTechs)
-      })
-      .catch(err => toast.error('algo deu errado'))
+    try {
+      api.delete(`/users/techs/${techId}`)
+      toast.success('Tecnologia excluida com sucesso')
+      const newTechs = techs.filter(currentTech => currentTech.id !== techId)
+      setTechs(newTechs)
+    } catch (error) {
+      toast.error('algo deu errado')
+    }
   }
 
+  // const deleteTech = (techId: string): void => {
+  //   api
+  //     .delete(`/users/techs/${techId}`)
+  //     .then(resp => {
+  //       toast.success('Tecnologia excluida com sucesso')
+  //       const newTechs = techs.filter(currentTech => currentTech.id !== techId)
+  //       setTechs(newTechs)
+  //     })
+  //     .catch(err => toast.error('algo deu errado'))
+  // }
   return (
     <TechContext.Provider
       value={{ deleteTech, createTech, modalVisible, setModalVisible }}

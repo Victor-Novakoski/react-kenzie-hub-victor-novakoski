@@ -24,6 +24,7 @@ export const ListTecnologias = styled.section`
       border-radius: 4px;
     }
   }
+  
   ul {
     background-color: var(--Grey-3);
     width: 100%;
