@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import { BsTrash, BsPlusLg } from 'react-icons/bs'
 import { useTechContext } from '../../Providers/TechContext'
 import { useUserContext } from '../../Providers/UserContextProvider'
 import Modal from '../Modal'
 import { ListTecnologias } from './styles'
 
-function TodoList() {
+function TechList() {
   const { techs } = useUserContext()
   const { deleteTech, modalVisible, setModalVisible } = useTechContext()
 
@@ -52,4 +51,4 @@ function TodoList() {
   )
 }
 
-export default TodoList
+export default TechList

@@ -69,29 +69,49 @@ export const UserContextProvider = ({ children }: IUserProviderProps) => {
         }
       }
       setLoading(false)
-      api.defaults.headers.common.authorization = `Bearer ${token}`
     }
     loadUser()
   }, [])
 
-  const loginFunction = (formLogin: IUserLogin): void => {
-    api
-      .post('/sessions', formLogin)
-      .then(resp => {
-        localStorage.setItem('@token', resp.data.token)
-        setUser1(resp.data.user)
-        navigate('/dashboard', { replace: true })
-        toast.success('Bem vindo ^^')
-      })
-      .catch(err => toast.error('email ou senha inválido'))
+  const loginFunction = async (formLogin: IUserLogin) => {
+    try {
+      const { data } = await api.post('/sessions', formLogin)
+      localStorage.setItem('@token', data.token)
+      setUser1(data.user)
+      navigate('/dashboard', { replace: true })
+      toast.success('Bem vindo ^^')
+    } catch (error) {
+      toast.error('email ou senha inválido')
+    }
   }
 
-  const registerSubmit = (formRegister: IUserRegister): void => {
-    api
-      .post('/users', formRegister)
-      .then(resp => toast.success('conta criada com sucesso!'))
-      .catch(err => toast.error('Ops! Algo deu errado'))
+  // const loginFunction = (formLogin: IUserLogin): void => {
+  //   api
+  //     .post('/sessions', formLogin)
+  //     .then(resp => {
+  //       localStorage.setItem('@token', resp.data.token)
+  //       setUser1(resp.data.user)
+  //       navigate('/dashboard', { replace: true })
+  //       toast.success('Bem vindo ^^')
+  //     })
+  //     .catch(err => toast.error('email ou senha inválido'))
+  // }
+
+  const registerSubmit = (formRegister: IUserRegister) => {
+    try {
+      api.post('/users', formRegister)
+      toast.success('conta criada com sucesso!')
+    } catch (error) {
+      toast.error('Ops! Algo deu errado')
+    }
   }
+
+  // const registerSubmit = (formRegister: IUserRegister): void => {
+  //   api
+  //     .post('/users', formRegister)
+  //     .then(resp => toast.success('conta criada com sucesso!'))
+  //     .catch(err => toast.error('Ops! Algo deu errado'))
+  // }
 
   const logout = (): void => {
     window.localStorage.removeItem('@token')

@@ -28,7 +28,7 @@ export const ModalStyle = styled.section`
     background-color: var(--Grey-3);
     border-radius: 8px;
     overflow: hidden;
-    
+
     div {
       width: 100%;
       display: flex;
@@ -52,7 +52,7 @@ export const ModalStyle = styled.section`
       gap: 1rem;
       padding: 1rem;
 
-      p{
+      p {
         color: var(--Negative);
       }
 
