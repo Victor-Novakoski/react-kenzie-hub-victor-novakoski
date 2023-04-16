@@ -1,5 +1,7 @@
 # react-kenzie-hub
 
+link do vercel https://kenziehub-novakoski.vercel.app
+
 Rodando localmente
 Clone o projeto
 
